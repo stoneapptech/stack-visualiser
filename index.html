@@ -92,7 +92,7 @@
             let el = document.createElement(tagName);
 
             if (content) el.innerText = content;
-            if (classList.length) classList.forEach(name => el.classList.add(name));
+            classList.forEach(name => el.classList.add(name));
             Object.entries(props).forEach(([key, value]) => { el[key] = value; });
 
             return el;
