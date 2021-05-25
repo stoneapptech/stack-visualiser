@@ -53,6 +53,23 @@
         .control :not(:first-child) {
             margin-left: 10px;
         }
+
+        @media screen and (max-width: 640px) {
+            main {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr min-content;
+
+                padding: 25px;
+            }
+            .control {
+                flex-wrap: wrap;
+            }
+        }
+        @media screen and (max-width: 320px) {
+            main {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
