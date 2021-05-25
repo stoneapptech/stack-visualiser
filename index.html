@@ -88,33 +88,44 @@
     <script>
         const dqs = (selector, ctx=document) => ctx.querySelector(selector);
 
+        HTMLElement.prototype.on = function(type, callback, options={}) {
+            this.addEventListener(type, callback, options);
+            return this;
+        }
+
         function createElement(tagName, content="", classList=[], props={}) {
             let el = document.createElement(tagName);
 
             if (content) el.innerText = content;
             classList.forEach(name => el.classList.add(name));
-            Object.entries(props).forEach(([key, value]) => { el[key] = value; });
+            Object.entries(props).forEach(([key, value]) => el[key] = value);
 
             return el;
         }
 
-        dqs("#add").onclick = (ev) => {
+        function push() {
             if (dqs("#input").value == "") return;
 
             let el = createElement("div", dqs("#input").value, ["item"], { contentEditable: true, spellcheck: false });
             dqs("#stack").insertAdjacentElement("afterbegin", el);
         }
 
-        dqs("#pop").onclick = (ev) => {
+        function pop() {
             let stack = dqs("#stack");
             if (!stack.children.length) return;
 
             stack.removeChild(stack.children[0]);
         }
 
-        dqs("#empty").onclick = (ev) => {
+        function empty() {
             dqs("#stack").innerHTML = "";
         }
+
+        dqs("#add").on("click", push);
+
+        dqs("#pop").on("click", pop);
+
+        dqs("#empty").on("click", empty);
     </script>
 </body>
 </html>
