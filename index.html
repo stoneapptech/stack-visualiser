@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stack Visualiser</title>
     <style>
+        :root {
+            --stack-border-style: 2.5px solid black;
+            --stack-border-radius: .5em;
+            --item-border-style: 2px solid black;
+        }
         * {
             box-sizing: border-box;
         }
@@ -33,16 +38,28 @@
             justify-content: flex-end;
             min-height: 100%;
 
-            border: 2.5px solid black;
+            border: var(--stack-border-style);
+            border-radius: 0 0 var(--stack-border-radius) var(--stack-border-radius);
+        }
+        :not(.reversed).stack {
             border-top: none;
-            border-radius: 0 0 .5em .5em;
+        }
+        .reversed.stack {
+            flex-direction: column-reverse;
+            border-radius: var(--stack-border-radius) var(--stack-border-radius) 0 0;
+            border-bottom: none;
         }
         .stack .item {
-            border-top: 2px solid black;
             padding: 10px 30px;
             width: 100%;
 
             text-align: center;
+        }
+        :not(.reversed).stack .item {
+            border-top: var(--item-border-style);
+        }
+        .reversed.stack .item {
+            border-bottom: var(--item-border-style);
         }
 
         .control {
@@ -52,7 +69,7 @@
             
             flex-direction: column;
         }
-        .control :not(:first-child) {
+        .control > :not(:first-child) {
             margin-top: 10px;
         }
         .control .field :not(:first-child) {
@@ -83,6 +100,10 @@
             <div id="stack" class="stack"></div>
         </div>
         <div class="control">
+            <div class="field">
+                <input id="reverse" name="reverse" type="checkbox" autocomplete="off">
+                <label for="reverse">Reverse</label>
+            </div>
             <div class="field">
                 <input id="input" name="input" type="text" placeholder="content..." autocomplete="off" autofocus spellcheck="false">
                 <button id="add">+</button>
@@ -129,6 +150,10 @@
             dqs("#stack").innerHTML = "";
         }
 
+        function reverseLayout(mode) {
+            dqs("#stack").classList.toggle("reversed", mode);
+        }
+
         dqs("#add").on("click", push);
         dqs("#input").on("keydown", (ev) => {
             if (ev.key == "Enter") push();
@@ -140,6 +165,10 @@
         });
 
         dqs("#empty").on("click", empty);
+
+        dqs("#reverse").on("change", (ev) => {
+            reverseLayout(ev.target.checked);
+        });
     </script>
 </body>
 </html>
