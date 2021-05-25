@@ -88,11 +88,12 @@
     <script>
         const dqs = (selector, ctx=document) => ctx.querySelector(selector);
 
-        function createElement(tagName, content="", classList=[]) {
+        function createElement(tagName, content="", classList=[], props={}) {
             let el = document.createElement(tagName);
 
             if (content) el.innerText = content;
             if (classList.length) classList.forEach(name => el.classList.add(name));
+            Object.entries(props).forEach(([key, value]) => { el[key] = value; });
 
             return el;
         }
@@ -100,7 +101,7 @@
         dqs("#add").onclick = (ev) => {
             if (dqs("#input").value == "") return;
 
-            let el = createElement("div", dqs("#input").value, ["item"]);
+            let el = createElement("div", dqs("#input").value, ["item"], { contentEditable: true, spellcheck: false });
             dqs("#stack").insertAdjacentElement("afterbegin", el);
         }
 
