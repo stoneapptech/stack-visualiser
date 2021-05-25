@@ -49,8 +49,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            
+            flex-direction: column;
         }
         .control :not(:first-child) {
+            margin-top: 10px;
+        }
+        .control .field :not(:first-child) {
             margin-left: 10px;
         }
 
@@ -78,10 +83,13 @@
             <div id="stack" class="stack"></div>
         </div>
         <div class="control">
-            <input id="input" name="input" type="text" placeholder="content..." autocomplete="off" autofocus spellcheck="false">
-            <button id="add">+</button>
-            <button id="pop">pop</button>
-            <button id="empty">empty</button>
+            <div class="field">
+                <input id="input" name="input" type="text" placeholder="content..." autocomplete="off" autofocus spellcheck="false">
+                <button id="add">+</button>
+                <button id="pop">pop</button>
+                <button id="empty">empty</button>
+            </div>
+            <a href="https://github.com/stoneapptech/stack-visualiser">GitHub</a>
         </div>
     </main>
 
