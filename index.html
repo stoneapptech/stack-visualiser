@@ -122,8 +122,14 @@
         }
 
         dqs("#add").on("click", push);
+        dqs("#input").on("keydown", (ev) => {
+            if (ev.key == "Enter") push();
+        });
 
         dqs("#pop").on("click", pop);
+        window.addEventListener("keydown", (ev) => {
+            if (ev.key == "Escape") pop();
+        });
 
         dqs("#empty").on("click", empty);
     </script>
