@@ -81,6 +81,7 @@
             <input id="input" name="input" type="text" placeholder="content..." autocomplete="off" autofocus spellcheck="false">
             <button id="add">+</button>
             <button id="pop">pop</button>
+            <button id="empty">empty</button>
         </div>
     </main>
 
@@ -108,6 +109,10 @@
             if (!stack.children.length) return;
 
             stack.removeChild(stack.children[0]);
+        }
+
+        dqs("#empty").onclick = (ev) => {
+            dqs("#stack").innerHTML = "";
         }
     </script>
 </body>
