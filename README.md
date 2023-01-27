@@ -1,7 +1,7 @@
 # stack-visualiser
 Simple stack visualizer.
 
-![screenshot](./screenshot.jpg)
+![screenshot](./screenshot.png)
 
 ## Feature
 - Simple is the best: Push / Pop / Empty / Reversed Layout.
